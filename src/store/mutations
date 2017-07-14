@@ -1,0 +1,33 @@
+/**
+ * Created by chenmf on 2017/6/23.
+ */
+import * as types from './mutation_types';
+
+const mutations = {
+  // 从localStorage中初始化会话列表
+  [types.SET_SESSIONS] (state, {sessions}) {
+    state.sessions = sessions;
+  },
+
+  // 发送消息
+  [types.SEND_MESSAGE] (state, {content}) {
+    let session = state.sessions.find(item => item.id === state.currentSessionId);
+    session.messages.push({
+      content: content,
+      date: new Date(),
+      self: true
+    });
+  },
+
+  //  选择会话
+  [types.SELECT_SESSION] (state, {id}) {
+    state.currentSessionId = id;
+  },
+
+  //  设置筛选关键词
+  [types.SET_FILTER_KEY] (state, {key}) {
+    state.filterKey = key;
+  }
+};
+
+export default mutations;
