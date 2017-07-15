@@ -8,7 +8,8 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
+  import YesnoTeller from '../api/yesno_teller';
 
   export default {
     data () {
@@ -16,12 +17,24 @@
         content: ''
       };
     },
+    computed: {
+      ...mapState(['currentSessionId'])
+    },
     methods: {
       ...mapActions(['sendMessage']),
       keySend: function (event) {
         if (event.ctrlKey && event.keyCode === 13 && this.content.length) {
-          this.sendMessage(this.content);
-          console.log(this.content);
+          this.sendMessage({content: this.content});
+          // get yesno answer
+          if (this.currentSessionId === 1) {
+            const vm = this;
+            const question = this.content;
+            setTimeout(() => {
+              YesnoTeller.getAnswer(question, answer => {
+                vm.sendMessage({content: answer, self: false});
+              });
+            }, 1000);
+          }
           this.content = '';
         }
       }

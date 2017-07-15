@@ -1,7 +1,7 @@
 <template>
-<div class="message" ref="list">
+<div class="message" ref="messageWrapper">
   <ul v-if="session">
-    <li v-for="item in session.messages">
+    <li v-for="item in session.messages" ref="messageList">
       <p class="time">
         <span>{{item.date | time}}</span>
       </p>
@@ -24,6 +24,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
+import IScroll from 'iscroll';
 
 export default {
   name: 'Message',
@@ -33,14 +34,33 @@ export default {
       session: 'currentSession'
     })
   },
+  mounted () {
+    this.$nextTick(() => {
+      this._initScroll();
+    });
+  },
+  methods: {
+    _initScroll () {
+      this.messageScroll = new IScroll(this.$refs.messageWrapper, {
+        click: true
+      });
+    }
+  },
   watch: {
     'session.messages': {
       deep: true,
       handler () {
-        this.$nextTick(() => {
-          const list = this.$refs.list;
-          list.scrollTop = list.scrollHeight - list.clientHeight;
-        });
+        if (this.messageScroll) {
+          this.$nextTick(() => {
+            this.messageScroll.refresh();
+            if (this.messageScroll.hasVerticalScroll) {
+              let el = this.$refs.messageWrapper.querySelector('li:last-child');
+              this.messageScroll.maxScrollY -= el.clientHeight;
+              // this.messageScroll.scrollToElement(el, 300, 0, el.clientHeight);
+            }
+            this.messageScroll.scrollTo(0, this.messageScroll.maxScrollY, 300);
+          });
+        }
       }
     }
   }
@@ -50,7 +70,7 @@ export default {
 <style scoped lang="less">
 .message {
   padding: 20px 15px;
-  overflow-y: scroll;
+  overflow: hidden;
 
   li {
     margin-bottom: 15px;

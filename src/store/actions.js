@@ -11,8 +11,8 @@ export const initSessions = ({commit}) => {
   }
 };
 
-export const sendMessage = ({commit}, content) => {
-  commit(types.SEND_MESSAGE, {content});
+export const sendMessage = ({commit}, {content, self = true}) => {
+  commit(types.SEND_MESSAGE, {content, self});
 };
 
 export const selectSession = ({commit}, id) => {
@@ -20,5 +20,6 @@ export const selectSession = ({commit}, id) => {
 };
 
 export const setFilterKey = ({commit}, key) => {
+  key = key.toLocaleLowerCase();
   commit(types.SET_FILTER_KEY, {key});
 };

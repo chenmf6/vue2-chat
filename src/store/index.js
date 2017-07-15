@@ -26,6 +26,23 @@ const state = {
     {
       id: 1,
       user: {
+        name: 'YesNo',
+        img: 'static/img/yesno-logo.jpg'
+      },
+      messages: [
+        {
+          content: 'Ask me anything, and I will tell you "yes" or "no"',
+          date: now
+        },
+        {
+          content: 'Questions usually end with a question mark.',
+          date: now
+        }
+      ]
+    },
+    {
+      id: 2,
+      user: {
         name: 'vue',
         img: 'static/img/vue-logo.png'
       },
@@ -41,7 +58,7 @@ const state = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       user: {
         name: 'webpack',
         img: 'static/img/webpack-logo.jpg'

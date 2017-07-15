@@ -3,7 +3,7 @@
  */
 export const filteredSessions = state => {
   return state.sessions.filter(
-    session => session.user.name.indexOf(state.filterKey) !== -1);
+    session => session.user.name.toLocaleLowerCase().indexOf(state.filterKey) !== -1);
 };
 
 export const currentSession = state => {

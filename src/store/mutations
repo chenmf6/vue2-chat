@@ -10,12 +10,12 @@ const mutations = {
   },
 
   // 发送消息
-  [types.SEND_MESSAGE] (state, {content}) {
+  [types.SEND_MESSAGE] (state, {content, self}) {
     let session = state.sessions.find(item => item.id === state.currentSessionId);
     session.messages.push({
       content: content,
       date: new Date(),
-      self: true
+      self: self
     });
   },
 
