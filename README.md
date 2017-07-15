@@ -1,6 +1,22 @@
 # vue2-chat
 
-> A Vue.js project
+> 模仿微信聊天
+
+> [在线演示请戳这里](https://chenmf6.github.io/vue2-chat/)
+
+![截图](./screenshot/intro.PNG)
+
+## 基本功能
+- 输入关键字筛选会话
+- 发送本地消息
+- 利用sessionStorage存储消息
+- 利用api实现简单的在线问答对话
+
+## 参考项目
+> [chat example by vue.js + vuex + webpack](https://github.com/Coffcer/vue-chat)
+
+> [vuex-example-chat](https://github.com/vuejs/vuex/tree/dev/examples/chat) 
+  
 
 ## Build Setup
 
@@ -17,5 +33,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
