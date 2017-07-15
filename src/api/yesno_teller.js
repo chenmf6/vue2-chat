@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://yesno.wtf' : '';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://yesno.wtf' : '';
 
 export default {
   getAnswer (question, cb) {
